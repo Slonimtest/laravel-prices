@@ -4,6 +4,44 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @OA\Schema(
+ *     schema="PriceResource",
+ *     title="Price Resource",
+ *     description="Price resource representation",
+ *     @OA\Property(
+ *         property="id",
+ *         type="integer",
+ *         example=1
+ *     ),
+ *     @OA\Property(
+ *         property="name",
+ *         type="string",
+ *         example="Product Name"
+ *     ),
+ *     @OA\Property(
+ *         property="price",
+ *         type="number",
+ *         format="float",
+ *         example=99.99
+ *     ),
+ *     @OA\Property(
+ *         property="currency",
+ *         type="string",
+ *         example="RUB"
+ *     ),
+ *     @OA\Property(
+ *         property="created_at",
+ *         type="string",
+ *         format="date-time"
+ *     ),
+ *     @OA\Property(
+ *         property="updated_at",
+ *         type="string",
+ *         format="date-time"
+ *     )
+ * )
+ */
 class PriceResource extends JsonResource
 {
     public static $currency = 'RUB';

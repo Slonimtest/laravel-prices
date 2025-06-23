@@ -1,0 +1,163 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "API for managing tasks",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/prices": {
+            "get": {
+                "tags": [
+                    "Prices"
+                ],
+                "summary": "Get list of products with prices",
+                "description": "Returns paginated list of products with their prices in selected currency",
+                "operationId": "63348bf88df6d4eb68dfd5192429af28",
+                "parameters": [
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "Currency code (default: RUB)",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "RUB",
+                            "example": "USD"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    },
+                    {
+                        "name": "order_by",
+                        "in": "query",
+                        "description": "Field to sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "price"
+                        }
+                    },
+                    {
+                        "name": "desc",
+                        "in": "query",
+                        "description": "Sort in descending order",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "example": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "list": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/PriceResource"
+                                            }
+                                        },
+                                        "listCount": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "lastPage": {
+                                            "type": "integer",
+                                            "example": 10
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The given data was invalid."
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "limit": [
+                                                    "The limit must be an integer."
+                                                ],
+                                                "order_by": [
+                                                    "The order by must be a string."
+                                                ],
+                                                "desc": [
+                                                    "The desc must be a boolean."
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "PriceResource": {
+                "title": "Price Resource",
+                "description": "Price resource representation",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Product Name"
+                    },
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 99.99
+                    },
+                    "currency": {
+                        "type": "string",
+                        "example": "RUB"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Prices",
+            "description": "Prices"
+        }
+    ]
+}
